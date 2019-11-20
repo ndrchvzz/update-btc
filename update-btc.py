@@ -36,7 +36,7 @@ LND_DAEMON_BIN   = 'lnd'
 LND_CLIENT_BIN   = 'lncli'
 LND_API_URL      = 'https://api.github.com/repos/lightningnetwork/lnd/releases/latest'
 
-Daemon = namedtuple('Daemon', 'keyId keyUrl, checksumFilePat, remoteUrlPat, tarPattern')
+Daemon = namedtuple('Daemon', 'keyId keyUrl checksumFilePat remoteUrlPat tarPattern')
 
 BTC = Daemon(
     keyId = '01EA5486DE18A882D4C2684590C8019E36C2E964',
@@ -398,7 +398,7 @@ def updateLnd(restart):
         dirName = 'lnd-linux-' + arch + '-' + latestTag
         instDir = LND_INSTALL_PATH + dirName + '/'
         log('', installTar(fileName, instDir))
-        if latestVer == getInstalledLndDaemonVersion(instDir):
+        if latestVer != getInstalledLndDaemonVersion(installLink):
             os.sync() # make sure all newly installed files are synced before switching
             makeLink(dirName, installLink)
             createLndLinks()
