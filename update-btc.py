@@ -333,7 +333,7 @@ def getInstalledBtcClientVersion(path):
 
 def getInstalledBtcDaemonVersion(path):
     return getInstalledVersion(path + 'bin/' + BTC_DAEMON_BIN,
-                               r'^Bitcoin Core Daemon version v(.*)\n')
+                               r'^Bitcoin Core (?:Daemon )?version v(.*)\n')
 
 def updateBtc(restart, runTests):
     arch = getGccArch()
@@ -382,7 +382,7 @@ def getLatestLndTag():
 
 def getInstalledLndDaemonVersion(path):
     return getInstalledVersion(path + LND_DAEMON_BIN,
-                               r'^lnd version (.*) .*\n')
+                               r'^lnd version .* commit=v(.*)\n')
 
 def updateLnd(restart):
     installLink = LND_INSTALL_PATH + LINK_NAME + '/'
