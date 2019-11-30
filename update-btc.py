@@ -189,7 +189,7 @@ def getRunningLnd():
     # "lncli getinfo" returns 1 if either lnd is not running or if wallet is locked
     # if lnd is not running stderr contains 'the connection in unavailable'
     # if lnd is locked      stderr contains 'Wallet is encrypted'
-    ver = getJson(BIN_PATH + LND_CLIENT_BIN + ' getinfo', r'^(\S*)', 'version')
+    ver = getJson(BIN_PATH + LND_CLIENT_BIN + ' getinfo', r'^\S+ commit=v(\S+)$', 'version')
     if ver:
         return ver
     elif getPids(LND_DAEMON_BIN):
